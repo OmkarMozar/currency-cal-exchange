@@ -4,6 +4,7 @@ import com.assesment.currency_cal_exchange.model.BillRequest;
 import com.assesment.currency_cal_exchange.model.PayableAmountResponse;
 import com.assesment.currency_cal_exchange.service.CurrencyExchangeService;
 import com.assesment.currency_cal_exchange.service.DiscountService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,11 +26,11 @@ public class BillController {
     private DiscountService discountService;
 
     @PostMapping("/calculate")
-    public ResponseEntity<PayableAmountResponse> calculatePayableAmount(@RequestBody BillRequest billRequest, Authentication authentication) {
+    public ResponseEntity<PayableAmountResponse> calculatePayableAmount(@Valid @RequestBody BillRequest billRequest, Authentication authentication) {
         //return ResponseEntity.ok(new PayableAmountResponse(0.25));
         String username = authentication.getName(); // Retrieve authenticated username
         System.out.println("Authenticated user: " + username);
-        Map<String, Double> rates = exchangeService.getExchangeRates(billRequest.getOriginalCurrency());
+        Map<String, Double> rates = exchangeService.getExchangeRates(billRequest.getOriginalCurrency().toUpperCase());
         double targetCurrencyExchangeRate = rates.get(billRequest.getTargetCurrency());
         double payableAmount0 = discountService.calculatePayableAmount(
                 billRequest.getUser(), billRequest.getTotalAmount(), billRequest.getItems());

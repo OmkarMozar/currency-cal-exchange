@@ -1,25 +1,25 @@
 package com.assesment.currency_cal_exchange.model;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
-
 
 public class BillRequest {
 
     private @Size(min = 1) List<Item> items;
 
-    private
-    @Size(max = 30, message = "Length must be less than 30")
-    @Pattern(regexp = "[a-z]*[A-Z]*", message = "User must contain alphabets only.")
-    User user;
+    private @Valid User user;
 
-    private String originalCurrency;
-    private String targetCurrency;
-    private Double totalAmount;
+    private @Size(min = 3, max = 3, message = "Length must be 3.")
+            @Pattern(regexp = "[a-zA-Z]*", message = "Must contain alphabet currency code associated with value in ISO 4217 format.")
+    String originalCurrency;
+
+    private @Size(min = 3, max = 3, message = "Length must be 3.")
+    @Pattern(regexp = "[a-zA-Z]*", message = "Must contain alphabet currency code associated with value in ISO 4217 format.")
+    String targetCurrency;
+
+     private Double totalAmount;
 
     public Double getTotalAmount() {
         return totalAmount;

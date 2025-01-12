@@ -1,12 +1,15 @@
 package com.assesment.currency_cal_exchange.model;
 
-import lombok.Builder;
-
-@Builder
 public class Item {
     private String name;
     private String category; // "grocery" or "non-grocery"
     private double price;
+
+    public Item(String name, String category, double price) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
 
     public String getName() {
         return name;

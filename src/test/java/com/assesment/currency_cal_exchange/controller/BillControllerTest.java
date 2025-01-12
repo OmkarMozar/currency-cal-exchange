@@ -34,26 +34,19 @@ class BillControllerTest {
     private BillController billController;
 
     public BillControllerTest() {
-        MockitoAnnotations.openMocks(this); // Initialize mocks
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     void testCalculatePayableAmount() {
-        // Given
+        //given
         BillRequest billRequest = new BillRequest();
         billRequest.setOriginalCurrency("USD");
         billRequest.setTargetCurrency("EUR");
         billRequest.setTotalAmount(200.0);
-        Item item = Item.builder()
-                .category("grocery")
-                .name("Apple")
-                .price(50.0)
-                .build();
+        Item item = new Item("Apple", "grocery", 50.0);
         billRequest.setItems(Collections.singletonList(item));
-        User user = User.builder()
-                .userType("employee")
-                .tenureInYears(3)
-                .build();
+        User user = new User("employee", 3);
 
         billRequest.setUser(user);
 
@@ -67,11 +60,11 @@ class BillControllerTest {
         when(discountService.convertCurrency(135.0, 1.0)).thenReturn(135.0);
         when(discountService.convertCurrency(135.0, 0.85)).thenReturn(114.75);
 
-        // When
+        //when
         ResponseEntity<PayableAmountResponse> response =
                 billController.calculatePayableAmount(billRequest, authentication);
 
-        // Then
+        //then
         assertEquals(114.75, response.getBody().getPayableAmount(), 0.001);
         verify(exchangeService, times(1)).getExchangeRates("USD");
         verify(discountService, times(1))

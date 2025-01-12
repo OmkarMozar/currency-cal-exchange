@@ -1,10 +1,7 @@
 package com.assesment.currency_cal_exchange.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
 
-@Builder
 public class User {
 
     private String userType; // "employee", "affiliate", or "customer"
@@ -12,6 +9,11 @@ public class User {
 
     public String getUserType() {
         return userType;
+    }
+
+    public User(String userType, int tenureInYears) {
+        this.userType = userType;
+        this.tenureInYears = tenureInYears;
     }
 
     public void setUserType(String userType) {

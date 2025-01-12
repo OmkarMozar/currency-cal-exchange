@@ -27,29 +27,26 @@ class CurrencyExchangeServiceTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        // Set mock values for @Value fields
         currencyExchangeService.baseUrl = "https://api.example.com";
         currencyExchangeService.apiKey = "test-api-key";
     }
 
     @Test
     void testGetExchangeRates_cacheMiss() {
-        // Given
+        //given
         String baseCurrency = "USD";
         String expectedUrl = "https://api.example.com/test-api-key/latest/USD";
 
-        // Mock the CurrencyApiResponse
         CurrencyApiResponse mockResponse = new CurrencyApiResponse();
         mockResponse.setConversionRates(Map.of("USD", 1.0, "EUR", 0.85));
 
-        // Mock RestTemplate behavior
         when(restTemplate.getForEntity(expectedUrl, CurrencyApiResponse.class))
                 .thenReturn(new ResponseEntity<>(mockResponse, HttpStatus.OK));
 
-        // When
+        //when
         Map<String, Double> rates = currencyExchangeService.getExchangeRates(baseCurrency);
 
-        // Then
+        //then
         assertEquals(2, rates.size());
         assertEquals(1.0, rates.get("USD"));
         assertEquals(0.85, rates.get("EUR"));
@@ -58,14 +55,14 @@ class CurrencyExchangeServiceTest {
 
     @Test
     void testGetExchangeRates_cacheHit() {
-        // Given
+        //given
         String baseCurrency = "USD";
         currencyExchangeService.cache.put(baseCurrency, Map.of("USD", 1.0, "EUR", 0.85));
 
-        // When
+        //when
         Map<String, Double> rates = currencyExchangeService.getExchangeRates(baseCurrency);
 
-        // Then
+        //then
         assertEquals(2, rates.size());
         assertEquals(1.0, rates.get("USD"));
         assertEquals(0.85, rates.get("EUR"));
