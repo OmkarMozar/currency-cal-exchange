@@ -13,7 +13,7 @@ Please refer design diagrams here: https://github.com/OmkarMozar/currency-cal-ex
 - Secures API endpoints with Basic Authentication.
 
 ## Prerequisites
-- Java 17 or higher
+- Java 23 or higher
 - Maven 3.8+
 - A currency exchange API key (e.g., from Open Exchange Rates or ExchangeRate-API)
 
