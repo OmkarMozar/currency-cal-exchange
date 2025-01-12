@@ -74,7 +74,7 @@ This endpoint calculates the payable amount for a given bill.
 #### Response
 ```json
 {
-  "payableAmount": 70.5
+  "payableAmount": 63.3165
 }
 ```
 
@@ -83,7 +83,7 @@ This endpoint is protected by Basic Authentication. Use your username and passwo
 
 Example using cURL:
 ```bash
-curl -u username:password -X POST \
+curl -u employee:password1 -X POST \
 -H "Content-Type: application/json" \
 -d '{
   "items": [
