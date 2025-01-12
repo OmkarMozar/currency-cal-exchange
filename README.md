@@ -47,7 +47,7 @@ To generate a coverage report:
 ```bash
 $ mvn clean verify
 ```
-The report can be found at `target/site/jacoco/index.html`.
+The reports can be found at `target/surefire-reports/`.
 
 ## API Endpoint
 
