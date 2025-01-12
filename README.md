@@ -24,7 +24,7 @@ $ cd currency-cal-exchange
 ```
 
 ### 2. Configure Environment Variables
-Create an `.env` file in the project root directory with the following content:
+Create an `application.properties` file in the project root directory with the following content:
 ```env
 CURRENCY_API_BASE_URL=https://open.er-api.com/v6/latest
 CURRENCY_API_KEY=your-api-key
