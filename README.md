@@ -2,6 +2,8 @@
 
 This Spring Boot application integrates with a currency exchange API to calculate the payable amount for a bill in a specified currency after applying applicable discounts.
 
+Please refer design diagrams here: https://github.com/OmkarMozar/currency-cal-exchange/tree/master/DesignDocs
+
 ## Features
 - Integrates with a third-party currency exchange API (e.g., Open Exchange Rates) for real-time exchange rates.
 - Supports percentage-based discounts (e.g., employee, affiliate, loyal customer).
